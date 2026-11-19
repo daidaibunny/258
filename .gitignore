@@ -1,0 +1,6 @@
+.venv/
+.ipynb_checkpoints/
+.ruff_cache/
+__pycache__/
+.DS_Store
+SeoulBikeData.csv
