@@ -20,10 +20,26 @@ ridge model on the August–September validation rows, using the same July train
 plus a validation row and the model configuration that teammate B should refit. A clearly
 explained negative result is a valid outcome.
 
+- [x] Added a shallow histogram gradient boosting regressor to the notebook and recorded
+  its fit time. It uses hour and weekday derived from the existing hour-of-week input,
+  the holiday flag and the same 1-, 24- and 168-hour rental counts.
+- [x] Compared all four methods on the 1,464 August–September hours after fitting through
+  July. Boosting MAE was 114.8 versus 136.0 for calendar-plus-history ridge. At 09:00 it
+  improved weekday MAE (294.1 to 156.3) and increased weekend MAE (69.8 to 80.8).
+- [x] Froze `models["History gradient boosting"]` for B. Clone this pipeline and refit on
+  `train` plus `valid` using `predictors`. The model cell specifies 100 rounds, depth 3,
+  learning rate 0.1, at least 20 hours per leaf, squared-error loss, no early stopping
+  and seed 42. Apply the same nonnegative clipping at prediction time.
+- [x] Added and froze `models["Time-interaction ridge"]` as a second comparison. Keep
+  the original ridge penalty of 1 and the same predictors. Let the standardized previous-hour
+  count have one slope adjustment per clock hour and weekday/weekend group (48 in total).
+  Validation MAE was 91.0 overall, 87.4 in August and 94.6 in September. B can clone
+  and refit this pipeline alongside the frozen boosting model.
+
 ## Teammate B — Final evaluation and interpretation
 
 After A freezes the model configuration, refit the learned methods on `train` plus `valid`.
-Evaluate persistence, calendar ridge, calendar-plus-history ridge and A's comparison on the
+Evaluate persistence, calendar ridge, calendar-plus-history ridge and both of A's models on the
 same 1,464 October–November hours. At each forecast time the previous hour's observed count
 is available. Fit encoders and scaling on the training history only.
 
