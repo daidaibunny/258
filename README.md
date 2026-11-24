@@ -8,7 +8,10 @@ cover the final evaluation, presentation and submission.
 In four monthly forecasts from June through September 2018, adding the previous hour's
 rental count to a calendar model reduced mean absolute error from 533.6 to 154.1
 rentals per hour. Adding counts from one day and one week earlier reduced it to 150.9.
-The October–November test period is reserved for the group's final comparison.
+On the held-out October–November test period, refit through September, a ridge model that
+lets the previous-hour count have a different slope for each clock hour and day type reached
+73.8 rentals per hour, against 108.4 for single-slope history ridge, 99.4 for gradient boosting
+and 200.3 for repeating the previous hour.
 
 ## Run the notebook
 

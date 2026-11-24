@@ -47,6 +47,20 @@ is available. Fit encoders and scaling on the training history only.
 number of hours in each group if comparing operating and closure hours. Use group results or
 a short forecast trace to explain where the model helped and where it struggled.
 
+- [x] Refit the four learned models with `clone` on `train` plus `valid` (7,128 hours), keeping
+  every frozen setting. Scored all five methods on the 1,464 October–November hours.
+- [x] Final table: time-interaction ridge 73.8 MAE, boosting 99.4, history ridge 108.4,
+  previous hour 200.3, calendar ridge 319.0. Same order by month, under RMSE and on validation.
+- [x] Resampled the 61 test days 2,000 times. Time-interaction ridge beats boosting by 25.6
+  (95% interval 17.8–33.6) and history ridge by 34.6 (26.7–42.6).
+- [x] Grouped errors into closed (151 h), first hour after a closure (8 h), operating holiday
+  (23 h) and other operating hours (1,282 h). Closures and reopenings cause the largest misses.
+  Boosting does best on the 3 October holiday because the interaction groups treat it as a weekday.
+- [x] Error-analysis figure: operating-hour MAE by forecast hour and a trace of 1–7 October.
+  Added the conclusion and limitations (operating status, holidays, weather).
+- Note: on a fresh run boosting's validation MAE is 115.1 rather than the 114.8 quoted in A's
+  text, probably a library or platform difference. A should confirm and update the text.
+
 ## Teammate C — Related work, presentation and submission
 
 Find original studies on Seoul rentals or a comparable demand-forecasting task. Compare
